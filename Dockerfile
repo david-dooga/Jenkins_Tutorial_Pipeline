@@ -1,7 +1,5 @@
-FROM ubuntu
-RUN apt-get update && apt-get install -y tzdata
-RUN apt-get -y install apache2
-COPY index.html /var/www/html
-ENTRYPOINT ["apachectl", "-D", "FOREGROUND"]
-ENV name dheerajtechinsight
-
+FROM nginx:alpine
+RUN rm -rf /usr/share/nginx/html/*
+COPY index.html /usr/share/nginx/html/index.html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
